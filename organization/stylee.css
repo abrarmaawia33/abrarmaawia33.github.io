@@ -1,0 +1,617 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&family=Racing+Sans+One&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    scroll-behavior: smooth;
+}
+:root{
+    --primary: #fa8500;
+}
+
+body{
+    margin: 0;
+    color: #fff;
+    background: #161616;
+    font-family:"Racing Sans One", sans-serif;
+}
+
+.stats{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+section{
+    padding: 2.5em;
+}
+/*scrollbar*/
+body::-webkit-scrollbar{
+    width: 10px;/*thickness of the scrollbar*/
+}
+/* the color of the scrollbar*/
+body::-webkit-scrollbar-track{
+    background-color: rgb(0, 0, 0);
+}
+
+/* the color of the scrollbar*/
+body::-webkit-scrollbar-thumb{
+    background-color: var(--primary);
+    border-radius: 7px;
+    border: 2px solid rgb(0, 0, 0);
+}
+
+body::-webkit-scrollbar-button{
+    display: none;
+}
+
+
+/*header*/
+header{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 100px;
+    z-index:1000;
+}
+header::after{
+    position: absolute;
+    content: '';
+    top:50%;
+    transform: translateY(-50%);
+    left:100px;
+    height:5px;
+    width:40%;
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+/* lexus logo*/
+.logo{
+  font-size: 30px;
+  color:#fff;
+}
+.logo img{
+    max-width: 150px;
+}
+
+header .year{
+    font-family: "Racing Sans One", sans-serif;
+    font-size: 1em;
+    color:#fff;
+    letter-spacing: 1px;
+    font-weight: 800;
+    margin-top: 40px;
+}
+/* the menu */
+header .menu{
+    position: relative;
+    height:30px;
+    width:30px;
+    background:url(images/menu-3-fill.png)no-repeat;
+    background-size: 30px;
+    background-position: center;
+    filter: invert(1);
+    cursor: pointer;
+}
+header .menu.active{
+    position: relative;
+    height:35px;
+    width:35px;
+    background: url(images/close-line.png)no-repeat;
+    background-size: 35px;
+    background-position: center;
+    filter: invert(1);
+    cursor: pointer;
+}
+
+/*Navigation*/
+.nav{
+    z-index: 200;
+    position: absolute;
+    right: 100px;
+    top: 0;
+    width: 30%;
+    height:5px;
+    border-bottom: 5px solid;
+    border-image: linear-gradient( 90deg, transparent, var(--primary), var(--primary)) 30;
+    background: transparent;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+    transform-origin: right;
+}
+.nav.active{
+    top:100px;
+    width: 40%;
+    height: 100px;
+    border-top: 5px solid;
+    border-image: linear-gradient(90deg, transparent, var(--primary), var(--primary), transparent) 30;
+    border-bottom: none;
+}
+.nav li{
+    position: relative;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100px);
+    transition: 0.5s;
+}
+.nav.active li{
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+}
+.nav li a{
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 200;
+    letter-spacing: 1px;
+    padding: 8px 20px;
+    transition: 0.2s;
+    cursor:pointer;  
+}
+.nav li a:hover{
+    box-shadow: inset 0 0 20px rgba(222, 144, 0, 0.5);
+}
+
+
+/*banner*/
+.banner{
+    position: relative;
+    width:100%;
+    min-height: 100vh;
+    padding: 0 100px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.5s;
+}
+.banner::after{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width:100%;
+    height:100%;
+    background: radial-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9));
+}
+.banner::before{
+    position: absolute;
+    content: '';
+    top:25%;
+    left:0;
+    width:5px;
+    height:40%;
+    background: linear-gradient(var(--primary), var(--primary), transparent);
+    z-index: 100;
+}
+/*background video*/
+.banner .bg-video{
+    display: none;
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    object-position: center;
+}
+.banner .bg-video.active{
+    display: block;
+}
+.banner .content{
+    position: relative;
+    max-width: 700px;
+    padding-bottom: 50px;
+    z-index: 100;
+}
+/* header title */
+.banner .content h1{
+    font-family:"Racing Sans One", sans-serif; 
+    font-size: 9em;
+    color: #fff;
+    font-weight: 500;
+    line-height: 0.8em;
+    letter-spacing: 5px;
+}
+.banner .content .lexus{
+    font-size: 4em;
+    text-transform: uppercase;
+    color: var(--primary);
+    display: none;
+}
+.banner .content .lexus.active{
+    display:block;
+}
+/* description paragraph */
+.banner .content p{
+    color:#fff;
+    font-size: 200;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+}
+/* Explore button */
+.banner .content a{
+    position: relative;
+    width:200px;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 20px;
+    background: transparent;
+    border-bottom: 3px solid;
+    border-image:linear-gradient(90deg, transparent, var(--primary), var(--primary), transparent) 30;
+    box-shadow: inset 0 0 10px rgba(222, 144, 0, 0.5);
+    backdrop-filter: blur(20px);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.5s;
+}
+.banner .content a:hover{
+box-shadow: inset 0 0 50px rgba(222, 144, 0, 0.5);
+}
+/*animation slid in left */
+@keyframes slideInLeft {
+    from{
+        transform: translateX(-300px);
+    }
+    to{
+        transform: translateX(0);
+    }
+}
+.banner .content h1,
+.banner .content p,
+.banner .content .lexus,
+.banner .content a{
+    animation:slideInLeft 1s ease-in 1s 1 normal none;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    header {
+        padding: 20px 50px;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+    header::after{
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--primary);
+    }
+
+    .logo {
+        margin-top: 10px;
+    }
+    .nav{
+        right:0;
+        width: 100%;
+    }
+    .nav.active{
+        right: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh; 
+        display: flex;
+        flex-direction: column;
+        /*border: none;*/
+    }
+    .banner{
+        padding: 120px 30px 100px;
+    }
+    .banner .contact{
+        position: relative;
+        padding: 50px 0 100px;
+    }
+    .banner .content h1{
+        font-size: 3em;
+    }
+    .banner .contact .lexus{
+        font-size: 1rem;
+    }
+    .banner .contact a{
+        width: 150px;
+        padding: 15px 25px;  
+    }
+}
+
+/* lexus images section */
+.panels{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 40em;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-top: 8em;
+}
+/* Discover button */
+.panel a {
+    position: relative;
+    width:100px;
+    color: #000;
+    text-decoration: none;
+    padding: 15px 20px;
+    background: var(--primary);
+    border-bottom: 3px solid;
+    text-transform: uppercase;
+    transition: 0.5s;
+}
+.panel a:hover{
+color: #ffffff;
+background: #282828;
+}
+
+.panel > div{
+    padding: 1em;
+}
+.panels-sm{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+/*the white and orage border */
+.panel:first-child,
+.panel:last-child{
+    padding: 1em;
+}
+/* orange border */
+.panel:first-child{
+    background: var(--primary);
+}
+/*white border */
+.panel:last-child{
+    background: #fff;
+    color:#555;
+}
+/* border with background image */
+.panel:nth-child(2){
+    background: url(images/pic1.jpeg) no-repeat center;
+    display: block;
+    transition: transform 0.7s ease;
+}
+.panel:nth-child(2):hover{
+    transform: scale(1.1);
+}
+/* border with background image */
+.panel:nth-child(3){
+    background: url(images/pic2.jpeg) no-repeat center;
+    display: block;
+    transition: transform 0.7s ease;
+}
+.panel:nth-child(3):hover{
+    transform: scale(1.1);
+}
+/* border with background image sizes */
+.panel:nth-child(2),
+.panel:nth-child(3){
+    background-size: cover;
+    position: relative;
+}
+
+.panel:nth-child(2)::before,
+.panel:nth-child(3)::before{
+    content: '';
+    background: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+}
+.panel h2{
+    margin: 0.7em 0;
+}
+/* border with background image */
+.panel-lg{
+    background: url(images/pic3.jpeg)no-repeat center;
+    background-size: cover;
+    width:100%;
+    height:100%;
+    display: block;
+    transition: transform 0.7s ease;
+}
+.panel-lg:hover{
+    transform: scale(1.1);
+}
+
+
+/* about lexus car section */
+.car-stats{
+    padding: 5em 1em;
+}
+/* main div */
+.stats{
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.stats > div{
+    margin-bottom: 1em;
+    position: relative;
+    min-width: 10em;
+}
+.stats > div h1:nth-child(2){
+    color: #282828;
+    position: absolute;
+    top:30%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    z-index:-1;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+.stats h5{
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 0.7em;
+}
+.counter{
+    margin: 0.1em 0;
+}
+.car{
+    padding: 4em 1em 4em 1em;
+    margin-top: 8em;
+}
+/*the three animated circles */
+.circle{
+    border: 2px #ccc solid;
+    border-radius: 50%;
+    width:100%;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    background: #161616;
+    animation: glow 4s ease-in-out infinite;
+    aspect-ratio: 3 / 1;
+}
+/* the car image */
+.car img{
+    width:70%;
+    position: absolute;
+    top:-50%;
+    left:50%;
+    transform: translateX(-50%);
+    z-index:1;
+}
+/*the three animated circles */
+.circle div{
+   border:inherit;
+   border-radius: inherit;
+   background: inherit;
+   position: absolute;
+   left:50%;
+   transform: translateX(-50%); 
+   animation: inherit;
+}
+.circle .inner-md-circle{
+    width:75%;
+    height:75%;
+    top:10%;
+    animation-delay: 3s;
+}
+.circle .inner-sm-circle{
+    width:50%;
+    height:50%;
+    top:20%;
+    animation-delay: 6s;
+}
+/*Responsive Design */
+@keyframes glow{
+    0%{
+        box-shadow: none;
+    }
+    50%{
+        box-shadow: 0 0 1em var(--primary);
+    }
+    100%{
+        box-shadow: none;
+    }
+}
+
+/* youtube video */
+.youtube {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh;
+}
+/* size of the youtube video*/
+.videoo {
+    width: 800px; 
+    height:400px; 
+}
+
+.videoo iframe {
+    width: 100%; 
+    height: 100%; 
+}
+
+
+/*footer*/
+footer {
+    padding: 80px 13% 70px;
+    background-color: #000000; 
+    
+}
+.footer-section{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+    gap: 3.5rem;
+    font-family: sans-serif;
+    
+}
+
+.contact h4 {
+    color: #fa8500;
+    margin-bottom: 1.5rem;
+    font-size: 20px;
+}
+
+.contact li {
+   margin-bottom: 16px;
+   list-style-type: none;
+
+}
+.contact li a{
+    display: block;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    transition: all .40s ease;
+    text-decoration: none;
+   
+
+}
+.contact li a:hover{
+    transform: translateY(-3px) translateX(-5px);
+}
+/* social media icons */
+.icons a{
+    display: inline-block;
+    font-size: 22px;
+    color: #fff;
+    margin-left: 17px;
+    transform: all .40s ease;
+    text-decoration: none;
+}
+.footer-content{
+    font-size: 20px;
+    color:#fff;
+    margin-bottom: 12px;
+}
+.last-img img{
+    max-width: 150px; 
+}
+
+/* Responsive design */
+@media (max-width:1690px){
+    section{
+        padding:50px 5% 40px;
+    }
+}@media (max-width:1120px){
+    .footer{
+        display:grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+        gap: 2rem;
+    }
+}@media (max-width:700px){
+    .footer{
+        display:grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+        gap: 2.5rem;
+    }
+}
